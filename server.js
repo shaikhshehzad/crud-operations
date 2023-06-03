@@ -22,6 +22,9 @@ app.get("", (req, res) => {
 
 app.use("/api/v1/contacts" , require("./routes/contactRoutes") );
 app.use("/api/v2/contacts" , require("./routes/contactRoutesV2") );
+
+
+
 app.get("*", (req, res) => {
   res.send(`You're hitting a wrong end point`  );
 });
