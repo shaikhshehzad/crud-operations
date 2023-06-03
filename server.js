@@ -6,6 +6,7 @@ const dotenv = require("dotenv").config();
 
 const app = express();
 const port = process.env.port || 5000;
+
 const siteOwner = process.env.siteOwner || "Shehzad "  ;
 
 app.get("", (req, res) => {
@@ -13,9 +14,14 @@ app.get("", (req, res) => {
   });
 
 
-app.get("/api/v1/contacts", (req, res) => {
-  res.send("Get all Contacts");
-});
+// app.get("/api/v1/contacts", (req, res) => {
+//   res.send("Get all Contacts");
+// });
+
+app.use("/api/v1/contacts" , require("./routes/contactRoutes") );
+app.use("/api/v2/contacts" , require("./routes/contactRoutesV2") );
+
+
 
 app.listen(port, () => {
   console.log(`started server listening on http://localhost:${port}`);
