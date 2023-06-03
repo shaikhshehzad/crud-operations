@@ -9,9 +9,7 @@ const port = process.env.port || 5000;
 
 const siteOwner = process.env.siteOwner || "Shehzad "  ;
 
-app.get("*", (req, res) => {
-  res.send(`You're hitting a wrong end point`  );
-});
+
 
 app.get("", (req, res) => {
     res.send(`Contact Manager ${siteOwner}`  );
@@ -24,7 +22,9 @@ app.get("", (req, res) => {
 
 app.use("/api/v1/contacts" , require("./routes/contactRoutes") );
 app.use("/api/v2/contacts" , require("./routes/contactRoutesV2") );
-
+app.get("*", (req, res) => {
+  res.send(`You're hitting a wrong end point`  );
+});
 
 
 app.listen(port, () => {
