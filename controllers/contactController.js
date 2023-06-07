@@ -9,6 +9,16 @@ const getContact = (req, res)=>{
 
 
 const createContact = (req, res)=>{
+    console.log(req.body)
+
+    const { name , email , phone } = req.body ;
+    if(!name || !email || !phone){
+        // res.send("All feilds are mandatory")
+        res.status(400);
+        throw new Error("All feilds are mandatory")
+    }
+
+
     res.status(201).json({ message :"Created Contact" });
 };
 
