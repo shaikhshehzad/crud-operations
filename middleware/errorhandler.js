@@ -31,8 +31,14 @@ const errorHandler = (err , req , res , next ) =>{
                     message : err.message ,
                     stackTrace: err.stack ,
             });   
-
+        case constants.SERVER_ERROR:
+                res.json({
+                    title : "SERVER_ERROR",
+                    message : err.message ,
+                    stackTrace: err.stack ,
+            });   
         default:
+            console.log("No Error All Good !!!")
             break ;
 
     };

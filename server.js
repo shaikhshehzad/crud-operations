@@ -12,6 +12,9 @@ const siteOwner = process.env.siteOwner || "Shehzad "  ;
 
 const errorHandler = require("./middleware/errorhandler");
 
+const connectToDb = require("./configs/dbConnection");
+
+connectToDb();
 
 app.get("", (req, res) => {
     res.send(`Contact Manager ${siteOwner}`  );

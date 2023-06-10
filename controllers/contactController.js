@@ -1,14 +1,15 @@
+const asyncHandler = require("express-async-handler")
 
 // get all contact
 
-const getContact = (req, res)=>{
+const getContact =  asyncHandler(async (req, res)=>{
     res.status(200).json({ message :"Get All Contacts" });
-};
+});
 
 //  create contact 
 
 
-const createContact = (req, res)=>{
+const createContact =  asyncHandler(async (req, res)=>{
     console.log(req.body)
 
     const { name , email , phone } = req.body ;
@@ -20,25 +21,25 @@ const createContact = (req, res)=>{
 
 
     res.status(201).json({ message :"Created Contact" });
-};
+});
 
 //  Get Specific Contact 
 
-const getCid =  (req, res)=>{
+const getCid =  asyncHandler(async (req, res)=>{
     res.status(200).json({ message :"Get Individual Contact" });
-};
+});
 
 //  Update Specific Contact 
 
-const updateCid =  (req, res)=>{
+const updateCid =   asyncHandler(async (req, res)=>{
     res.status(200).json({ message :"Contact Updated successfully " });
-}
+});
 
 //  delete Specific Contact 
 
-const deleteCid =  (req, res)=>{
+const deleteCid =  asyncHandler(async (req, res)=>{
     res.status(200).json({ message : "delete Contact "});
-}
+});
 
 
 
