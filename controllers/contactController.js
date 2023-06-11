@@ -13,7 +13,7 @@ const getContact =  asyncHandler(async (req, res)=>{
 
 
 const createContact =  asyncHandler(async (req, res)=>{
-    console.log(req.body)
+    console.log("The request body is  => ",req.body)
 
     const { name , email , phone } = req.body ;
     if(!name || !email || !phone){
@@ -21,9 +21,16 @@ const createContact =  asyncHandler(async (req, res)=>{
         res.status(400);
         throw new Error("All feilds are mandatory")
     }
+    const contact = await Contact.create({
+        name : req.body.name,
+        email : req.body.email,
+        phone :  req.body.phone ,
+        user_id: req.user.id,
+    });
+    res.status(201).json(contact);
 
 
-    res.status(201).json({ message :"Created Contact" });
+    // res.status(201).json({ message :"Created Contact" });
 });
 
 //  Get Specific Contact 

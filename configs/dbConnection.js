@@ -8,7 +8,7 @@ const connectToDb = async () =>{
 
 
     }catch(err){
-        console.log(err)
+        console.log("Mongodb Connection failed to establish Following error showed up =>" , err)
         process.exit(1)
     }
 }
