@@ -23,6 +23,9 @@ app.use("/api/v1/contacts" , require("./routes/contactRoutes/contactRoutes") )
 // below is version 2 of contact routes 
 // app.use("/api/v2/contacts", require("./routes/contactRoutes/contactRoutesV2"));
 
+app.use("/api/v1/users" , require("./routes/userRoutes/userRoutesV1") )
+
+
 
 
 app.use(errorHandler);
