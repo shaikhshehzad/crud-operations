@@ -18,8 +18,12 @@ app.get("", (req, res) => {
 
 app.use(express.json());
 
-app.use("/api/v1/contacts", require("./routes/contactRoutes"));
-app.use("/api/v2/contacts", require("./routes/contactRoutesV2"));
+
+app.use("/api/v1/contacts" , require("./routes/contactRoutes/contactRoutes") )
+// below is version 2 of contact routes 
+// app.use("/api/v2/contacts", require("./routes/contactRoutes/contactRoutesV2"));
+
+
 
 app.use(errorHandler);
 
