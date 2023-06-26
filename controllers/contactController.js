@@ -25,7 +25,6 @@ const createContact =  asyncHandler(async (req, res)=>{
         name : req.body.name,
         email : req.body.email,
         phone :  req.body.phone ,
-        user_id: req.user.id,
     });
     res.status(201).json(contact);
 
