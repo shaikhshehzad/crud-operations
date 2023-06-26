@@ -35,19 +35,60 @@ const createContact =  asyncHandler(async (req, res)=>{
 //  Get Specific Contact 
 
 const getCid =  asyncHandler(async (req, res)=>{
-    res.status(200).json({ message :"Get Individual Contact" });
+    // res.status(200).json({ message :"Get Individual Contact" });
+    const contact = await Contact.findById(req.params.id);
+    let date_ob = new Date();
+    let hours = date_ob.getHours();
+    // current minutes
+    let minutes = date_ob.getMinutes();
+    // current seconds
+    let seconds = date_ob.getSeconds();
+    console.log(date_ob)
+
+
+    console.log("Id from GId => " , req.params.id )
+    if(!contact){
+        res.status(404);
+        throw new Error("Contact Not Found");
+    }
+    res.status(200).json(contact);
+
 });
 
 //  Update Specific Contact 
 
 const updateCid =   asyncHandler(async (req, res)=>{
-    res.status(200).json({ message :"Contact Updated successfully " });
+    const contact = await Contact.findById(req.params.id);
+
+    console.log("Id from GId => " , req.params.id )
+    if(!contact){
+        res.status(404);
+        throw new Error("Contact Not Found");
+    }
+    
+    const updatedContact  = await Contact.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {new : true }
+    );
+
+    res.status(200).json(updatedContact);
+
+    // res.status(200).json({ message :"Contact Updated successfully " });
 });
 
 //  delete Specific Contact 
 
 const deleteCid =  asyncHandler(async (req, res)=>{
-    res.status(200).json({ message : "delete Contact "});
+    const contact = await Contact.findById(req.params.id);
+    console.log("Id from delete id => " , req.params.id )
+    if(!contact){
+        res.status(404);
+        throw new Error("Contact Not Found");
+    }
+    await Contact.deleteOne({ _id: req.params.id });
+    res.status(200).json(contact);
+    // res.status(200).json({ message : "delete Contact "});
 });
 
 
