@@ -121,9 +121,58 @@ const deleteCid =  asyncHandler(async (req, res)=>{
     // res.status(200).json({ message : "delete Contact "});
 });
 
+const searchedContact = asyncHandler(async (req , res) =>{
+
+    let searchTerm = req.params.contact ;
+    console.log("searchTerm" ,searchTerm )
+    const contact = await Contact.findById(req.params.id);
+
+    // ,
+    // name : { $regex:req.params.contact},
+    // phone : { $regex:req.params.contact}
+
+    // 
+    if(contact.user_id.toString() !== req.user.id ){
+        res.status(403) ;
+        throw new Error("User don't have permission ")
+    }
+
+
+
+    // 
+
+
+
+    if(searchTerm){
+        let filteredData = await Contact.find(
+            {
+                "$or" : [
+                    {
+                        email : { $regex:req.params.contact}
+                    },
+                    {
+                        name : { $regex:req.params.contact}
+                    },
+                    {
+                        phone : { $regex:req.params.contact}
+                    }
+                ]
+            }
+        )
+    
+    
+        res.status(200).json(filteredData);
+    }else{
+        res.status(400).json({"message" :  `nothing found for  ${searchTerm}   `  });
+
+    }
+    
+
+
+});
 
 
 
 
 
-module.exports = { getContact  , createContact , getCid , updateCid , deleteCid }
+module.exports = { getContact  , createContact , getCid , updateCid , deleteCid , searchedContact }
