@@ -5,13 +5,20 @@ const Contact = require("../models/contactModel")
 
 // get all contact
 
+// @access private
+
 const getContact =  asyncHandler(async (req, res)=>{
-    const contacts = await Contact.find();
+    console.log("req.body => " ,req.body)
+    console.log("req.body => " ,req.body.user_id)
+
+
+    const contacts = await Contact.find({user_id : req.body.user_id });
+
     res.status(200).json(contacts);
 });
 
 //  create contact 
-
+// @access private
 
 const createContact =  asyncHandler(async (req, res)=>{
     console.log("The request body is  => ",req.body)
@@ -34,7 +41,7 @@ const createContact =  asyncHandler(async (req, res)=>{
 });
 
 //  Get Specific Contact 
-
+// @access private
 const getCid =  asyncHandler(async (req, res)=>{
     // res.status(200).json({ message :"Get Individual Contact" });
     const contact = await Contact.findById(req.params.id);
@@ -57,7 +64,7 @@ const getCid =  asyncHandler(async (req, res)=>{
 });
 
 //  Update Specific Contact 
-
+// @access private
 const updateCid =   asyncHandler(async (req, res)=>{
     const contact = await Contact.findById(req.params.id);
 
@@ -79,7 +86,7 @@ const updateCid =   asyncHandler(async (req, res)=>{
 });
 
 //  delete Specific Contact 
-
+// @access private
 const deleteCid =  asyncHandler(async (req, res)=>{
     const contact = await Contact.findById(req.params.id);
     console.log("Id from delete id => " , req.params.id )
