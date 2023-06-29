@@ -82,6 +82,19 @@ const updateCid =   asyncHandler(async (req, res)=>{
         res.status(404);
         throw new Error("Contact Not Found");
     }
+
+    if(contact.user_id.toString() !== req.user.id ){
+        res.status(403) ;
+        throw new Error("User don't have permission ")
+    }
+
+    if(contact.user_id.toString() !== req.user.id ){
+        res.status(403) ;
+        throw new Error("User don't have permission ")
+    }
+
+
+
     
     const updatedContact  = await Contact.findByIdAndUpdate(
         req.params.id,
