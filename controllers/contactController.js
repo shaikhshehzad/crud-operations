@@ -11,10 +11,17 @@ const getContact =  asyncHandler(async (req, res)=>{
     console.log("req.body => " ,req.body)
     console.log("req.body => " ,req.body.user_id)
 
+    if(req.body.user_id){
+        const contacts = await Contact.find({user_id : req.body.user_id });
 
-    const contacts = await Contact.find({user_id : req.body.user_id });
+        res.status(200).json(contacts);
+    }else{
+        res.status(400);
+        throw new Error("Validation with user id is missing ")
 
-    res.status(200).json(contacts);
+    }
+
+    
 });
 
 //  create contact 
@@ -33,7 +40,9 @@ const createContact =  asyncHandler(async (req, res)=>{
         name : req.body.name,
         email : req.body.email,
         phone :  req.body.phone ,
+        user_id:req.user.id
     });
+    console.log(contact)
     res.status(201).json(contact);
 
  
